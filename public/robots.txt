@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /register
+
+# Authenticated routes — no value to search engines
+Disallow: /dashboard
+Disallow: /vehicles
+Disallow: /applications
+Disallow: /verifications
+Disallow: /settings
+Disallow: /admin
+
+# Callback / transactional pages
+Disallow: /applications/*/payment-callback
+
+Sitemap: https://transportadvisory.ng/sitemap.xml
