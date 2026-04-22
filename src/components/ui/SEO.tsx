@@ -16,7 +16,10 @@ const DEFAULT_DESCRIPTION =
 const DEFAULT_IMAGE = `${SITE_URL}/apple-touch-icon.svg`;
 
 const routeMetadata: Record<string, { title: string; description?: string; noindex?: boolean }> = {
-  '/': { title: 'Transport Advisory — Vehicle Compliance Platform for Nigeria', description: DEFAULT_DESCRIPTION },
+  '/': {
+    title: 'Transport Advisory — Vehicle Compliance Platform for Nigeria',
+    description: 'Never miss a vehicle document expiry again. Transport Advisory tracks your Motor Insurance, Vehicle License, and Roadworthiness Certificate, sends SMS and email reminders, and lets you renew online without licensing office visits. First 100 subscribers free.',
+  },
   '/login': { title: 'Sign In · Transport Advisory', description: 'Sign in to manage your vehicle documents, track expiry dates, and renew online.' },
   '/register': { title: 'Create Account · Transport Advisory', description: 'Join Transport Advisory — Nigeria\'s smarter way to manage vehicle compliance documents.' },
   '/dashboard': { title: 'Dashboard · Transport Advisory', noindex: true },

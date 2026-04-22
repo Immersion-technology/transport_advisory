@@ -9,6 +9,7 @@ import SEO from './components/ui/SEO';
 import AppLayout from './components/layout/AppLayout';
 
 // Lazy-loaded routes — each becomes its own chunk, shaving the initial bundle
+const OverviewPage = lazy(() => import('./pages/OverviewPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -43,11 +44,18 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+/** Always-public route — shows content whether signed in or not. */
+function OpenRoute({ children }: { children: React.ReactNode }) {
+  const { isLoading } = useAuth();
+  if (isLoading) return <PageLoader />;
+  return <>{children}</>;
+}
+
 function AppRoutes() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<OpenRoute><OverviewPage /></OpenRoute>} />
 
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
@@ -77,7 +85,7 @@ function AppRoutes() {
           <Route path="/admin/registry" element={<AdminRegistry />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   );
