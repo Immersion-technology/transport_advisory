@@ -57,7 +57,7 @@ const PRICING = [
   {
     tier: 'Founding Member',
     price: 'Free',
-    subtitle: 'First 100 subscribers',
+    subtitle: 'First 50 subscribers',
     features: ['Up to 3 vehicles', 'All reminder channels', 'Online renewals', 'Pre-purchase checks'],
     cta: 'Claim Free Spot',
     highlight: true,
@@ -84,7 +84,7 @@ const STATS = [
   { value: '3', label: 'Compulsory documents tracked', icon: FileText },
   { value: '36', label: 'States covered nationwide', icon: MapPin },
   { value: '24/7', label: 'Reminder monitoring', icon: Clock },
-  { value: '100+', label: 'Free founding spots', icon: Star },
+  { value: '50+', label: 'Free founding spots', icon: Star },
 ];
 
 export default function OverviewPage() {
@@ -136,7 +136,7 @@ export default function OverviewPage() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-full mb-6">
               <Star size={13} className="text-amber-600 fill-amber-500" />
-              <span className="text-xs font-semibold text-amber-800">First 100 subscribers free for life</span>
+              <span className="text-xs font-semibold text-amber-800">First 50 subscribers free for life</span>
             </div>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
               Your vehicle documents,<br />
@@ -356,7 +356,7 @@ export default function OverviewPage() {
             Stop worrying about expired documents
           </h2>
           <p className="text-emerald-100/80 mt-3 max-w-xl mx-auto leading-relaxed">
-            Join the first 100 vehicle owners and get lifetime free access to the dashboard.
+            Join the first 50 vehicle owners and get lifetime free access to the dashboard.
           </p>
           <Link to="/register" className="inline-block mt-6">
             <button className="px-6 py-3 bg-white text-[#0A3828] rounded-xl font-semibold text-sm hover:bg-emerald-50 inline-flex items-center gap-2">
