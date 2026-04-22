@@ -89,12 +89,12 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Welcome */}
       <motion.div {...fadeUp} transition={{ duration: 0.4 }}>
-        <div className="flex items-center justify-between">
+        <div className="flex items-start sm:items-center justify-between flex-wrap gap-3">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900">
               Good morning, {user?.firstName} 👋
             </h2>
-            <p className="text-sm text-gray-500 mt-0.5">Here's your vehicle compliance overview</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-0.5">Here's your vehicle compliance overview</p>
           </div>
           <Link to="/vehicles/new">
             <Button icon={<Plus size={16} />} size="sm">Add Vehicle</Button>

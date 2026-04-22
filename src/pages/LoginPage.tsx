@@ -82,7 +82,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right — form */}
-      <div className="flex-1 lg:max-w-md flex flex-col justify-center px-8 py-12 bg-[#F5F7F2]">
+      <div className="flex-1 lg:max-w-md flex flex-col justify-center px-5 sm:px-8 py-8 sm:py-12 bg-[#F5F7F2]">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}

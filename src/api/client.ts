@@ -21,9 +21,20 @@ api.interceptors.response.use(
   (res) => res,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('ta_token');
-      localStorage.removeItem('ta_user');
-      window.location.href = '/login';
+      const url: string = error.config?.url || '';
+      // A 401 from the login/register endpoints means "wrong credentials", not
+      // "session expired" — let the page handle it with a toast. Only force a
+      // redirect when an authenticated request (has a token) gets rejected.
+      const isAuthEndpoint = /\/auth\/(login|register)/.test(url);
+      const hasToken = !!localStorage.getItem('ta_token');
+
+      if (!isAuthEndpoint && hasToken) {
+        localStorage.removeItem('ta_token');
+        localStorage.removeItem('ta_user');
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      }
     }
     return Promise.reject(error);
   }

@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Car, FileText, Search,
-  Settings, LogOut, Users, ChevronRight,
+  Settings, LogOut, Users, ChevronRight, X,
   Bell, Package, ShieldCheck, Database,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -27,7 +27,12 @@ const adminNavItems: AdminNavItem[] = [
   { to: '/admin/staff', icon: ShieldCheck, label: 'Admin Staff', superAdminOnly: true },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  mobileOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function Sidebar({ mobileOpen = false, onClose }: SidebarProps = {}) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const isAdmin = user?.role === 'ADMIN';
@@ -54,9 +59,16 @@ export default function Sidebar() {
   }[user?.subscriptionTier || 'STANDARD'];
 
   return (
-    <aside className="w-64 bg-[#0A3828] text-white flex flex-col min-h-screen fixed left-0 top-0 z-40">
-      {/* Logo */}
-      <div className="p-6 border-b border-white/10">
+    <aside
+      className={`
+        w-64 bg-[#0A3828] text-white flex flex-col h-dvh fixed left-0 top-0 z-40
+        transition-transform duration-300 ease-out
+        lg:translate-x-0
+        ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}
+    >
+      {/* Logo + mobile close */}
+      <div className="p-4 sm:p-6 border-b border-white/10 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <LogoMark size={36} />
           <div>
@@ -64,6 +76,15 @@ export default function Sidebar() {
             <p className="text-xs text-emerald-300/70">Vehicle Compliance</p>
           </div>
         </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden w-8 h-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10"
+            aria-label="Close menu"
+          >
+            <X size={18} />
+          </button>
+        )}
       </div>
 
       {/* User Info */}

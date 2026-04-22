@@ -75,7 +75,7 @@ export default function RegisterPage() {
         <p className="text-white/30 text-xs">© 2026 Transport Advisory</p>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-8 py-12 bg-[#F5F7F2] overflow-y-auto">
+      <div className="flex-1 flex flex-col justify-center px-5 sm:px-8 py-8 sm:py-12 bg-[#F5F7F2] overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
