@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { User, Lock, CreditCard } from 'lucide-react';
+import { User, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { updateProfile, changePassword } from '../api/auth';
@@ -8,13 +8,11 @@ import { useAuth } from '../context/AuthContext';
 import Card from '../components/ui/Card';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import Badge from '../components/ui/Badge';
 import { formatDate } from '../utils';
 
 const tabs = [
   { id: 'profile', label: 'Profile', icon: User },
   { id: 'security', label: 'Security', icon: Lock },
-  { id: 'subscription', label: 'Subscription', icon: CreditCard },
 ];
 
 export default function SettingsPage() {
@@ -48,7 +46,6 @@ export default function SettingsPage() {
 
       {activeTab === 'profile' && <ProfileTab user={user} updateUser={updateUser} />}
       {activeTab === 'security' && <SecurityTab />}
-      {activeTab === 'subscription' && <SubscriptionTab user={user} />}
     </div>
   );
 }
@@ -141,68 +138,3 @@ function SecurityTab() {
   );
 }
 
-function SubscriptionTab({ user }: any) {
-  const tiers = {
-    FOUNDING_FREE: { label: 'Founding Member', price: 'Free', vehicles: 3, color: 'gold' as const },
-    STANDARD: { label: 'Standard', price: '₦5,000/year', vehicles: 3, color: 'neutral' as const },
-    FLEET: { label: 'Fleet', price: '₦15,000/year', vehicles: 20, color: 'info' as const },
-  };
-  const tier = tiers[user?.subscriptionTier as keyof typeof tiers] || tiers.STANDARD;
-
-  return (
-    <div className="space-y-4">
-      <Card className="p-6">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h3 className="font-semibold text-gray-900">Current Plan</h3>
-            <p className="text-sm text-gray-500">Your subscription details</p>
-          </div>
-          <Badge variant={tier.color}>{tier.label}</Badge>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-4 space-y-3">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Plan</span>
-            <span className="font-semibold">{tier.label}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Price</span>
-            <span className="font-semibold">{tier.price}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Vehicles allowed</span>
-            <span className="font-semibold">Up to {tier.vehicles}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Subscriber #</span>
-            <span className="font-semibold">#{user?.subscriberNumber}</span>
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Available Plans</h3>
-        <div className="space-y-3">
-          {[
-            { name: 'Standard', price: '₦5,000/year', vehicles: 3, features: ['Up to 3 vehicles', 'SMS & Email reminders', 'Online renewals', 'Document delivery'] },
-            { name: 'Fleet', price: '₦15,000/year', vehicles: 20, features: ['Up to 20 vehicles', 'All Standard features', 'Pre-purchase checks included', 'Priority support'] },
-          ].map(plan => (
-            <div key={plan.name} className="flex items-start gap-4 p-4 border border-gray-200 rounded-xl">
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-sm text-gray-900">{plan.name}</span>
-                  <span className="text-xs text-gray-500">{plan.price}</span>
-                </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
-                  {plan.features.map(f => (
-                    <span key={f} className="text-xs text-gray-500">· {f}</span>
-                  ))}
-                </div>
-              </div>
-              <Button variant="outline" size="sm">Upgrade</Button>
-            </div>
-          ))}
-        </div>
-      </Card>
-    </div>
-  );
-}

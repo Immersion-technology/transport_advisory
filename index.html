@@ -3,68 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="format-detection" content="telephone=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="color-scheme" content="light" />
 
-    <!-- Icons -->
+    <!-- Icons + PWA -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#0A3828" />
-    <meta name="theme-color" content="#0A3828" />
+    <meta name="theme-color" content="#0A3828" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A3828" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Transport Advisory" />
 
     <!-- Primary Meta -->
-    <title>Transport Advisory — Vehicle Compliance Platform for Nigeria</title>
-    <meta name="description" content="Nigeria's vehicle compliance platform. Track Motor Insurance, Vehicle License, and Roadworthiness Certificate expiry dates in one place. Receive SMS and email reminders and renew documents online without office visits." />
-    <meta name="keywords" content="vehicle compliance nigeria, motor insurance reminder, vehicle license renewal, roadworthiness certificate, niid verification, hackney permit, lagos car papers, verify plate number nigeria" />
-    <meta name="author" content="Transport Advisory" />
-    <meta name="robots" content="index, follow" />
+    <title>Transport Advisory Services — Vehicle Compliance Platform for Nigeria</title>
+    <meta name="description" content="Transport Advisory Services — your vehicle documents, road traffic and vehicular concerns, always in order. Track Vehicle Insurance, Vehicle Licence, and Roadworthiness expiry in one place. Free SMS and e-mail reminders. Renew online and get documents delivered. Not government owned." />
+    <meta name="keywords" content="transport advisory services, vehicle compliance nigeria, motor insurance reminder, vehicle licence renewal, roadworthiness certificate, hackney permit, commercial vehicle permit, ride-hailing permit, fleet management nigeria, lagos anpr fines, change of ownership, articulated vehicle registration" />
+    <meta name="author" content="Transport Advisory Services" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://transportadvisory.ng/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Transport Advisory — Vehicle Compliance Platform" />
-    <meta property="og:description" content="Track vehicle documents, receive reminders before expiry, and renew online without office visits." />
+    <meta property="og:title" content="Transport Advisory Services — Vehicle Compliance Platform" />
+    <meta property="og:description" content="Track vehicle documents, get free reminders, and renew online — soft copy + doorstep delivery. Not government owned." />
     <meta property="og:url" content="https://transportadvisory.ng/" />
     <meta property="og:image" content="https://transportadvisory.ng/apple-touch-icon.svg" />
-    <meta property="og:site_name" content="Transport Advisory" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="Transport Advisory Services — Vehicle Compliance Platform" />
+    <meta property="og:site_name" content="Transport Advisory Services" />
     <meta property="og:locale" content="en_NG" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Transport Advisory — Vehicle Compliance Platform" />
-    <meta name="twitter:description" content="Track vehicle documents, receive reminders before expiry, and renew online." />
+    <meta name="twitter:title" content="Transport Advisory Services — Vehicle Compliance Platform" />
+    <meta name="twitter:description" content="Track vehicle documents, get free reminders, and renew online." />
     <meta name="twitter:image" content="https://transportadvisory.ng/apple-touch-icon.svg" />
 
-    <!-- Performance: preconnect to font host + preload main font -->
+    <!-- Resource hints — kept tight to avoid wasted handshakes on slow networks -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    />
+    <link rel="dns-prefetch" href="https://api.paystack.co" />
+
+    <!--
+      Non-blocking font load: ship `media="print"` so the stylesheet doesn't block
+      the first paint, then flip to `all` once it's parsed. Falls back to a regular
+      stylesheet for browsers without the swap (noscript). Inter has font-display:swap
+      via the Google Fonts URL, so text appears in the system font until Inter loads.
+    -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
 
     <!-- Structured Data: Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Transport Advisory",
+      "name": "Transport Advisory Services",
       "url": "https://transportadvisory.ng",
       "logo": "https://transportadvisory.ng/apple-touch-icon.svg",
-      "description": "Nigeria's vehicle compliance platform — automated tracking, reminders, and renewal facilitation for vehicle documents.",
+      "description": "Private vehicle compliance platform for Nigeria — automated document tracking, free reminders, and renewal facilitation. Not government owned.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Lagos",
         "addressCountry": "NG"
       },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Nigeria"
-      },
+      "areaServed": { "@type": "Country", "name": "Nigeria" },
       "sameAs": []
     }
     </script>

@@ -28,11 +28,79 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Avoid iOS text-resize on landscape rotation */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Use the dynamic viewport on supporting browsers (iOS Safari) so 100dvh
+       sections don't get cut off behind the URL bar */
+    height: 100%;
   }
   body {
     background-color: #F5F7F2;
     color: #1a2e1a;
     margin: 0;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    /* Reduces CLS while Inter loads — a system fallback with similar metrics */
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    /* Prevent overscroll bounce on iOS revealing the page background */
+    overscroll-behavior-y: none;
+  }
+  /* Honour reduced-motion preference — kill long transitions / animations */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Tap-highlight on touch devices: replace the default grey flash with a
+     short, theme-tinted ripple feel via -webkit-tap-highlight-color */
+  a, button, [role="button"] {
+    -webkit-tap-highlight-color: rgba(10, 56, 40, 0.08);
+  }
+
+  /* Inputs / selects share a subtle border colour transition for focus —
+     keeps the theme cohesive without overriding component-level styles */
+  input, select, textarea {
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+}
+
+/* ---------- Theme-level animation primitives ---------- */
+/* Available as utility classes anywhere via `class="ad-fade-in"` etc.
+   Used for elements that aren't worth a Framer Motion wrapper. */
+@layer utilities {
+  @keyframes ad-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0);   }
+  }
+  @keyframes ad-pop-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1);    }
+  }
+  @keyframes ad-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+
+  .ad-fade-in {
+    animation: ad-fade-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .ad-pop-in {
+    animation: ad-pop-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Skeleton placeholder shimmer for loading states */
+  .ad-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.04) 0%,
+      rgba(0, 0, 0, 0.08) 40%,
+      rgba(0, 0, 0, 0.04) 80%
+    );
+    background-size: 200% 100%;
+    animation: ad-shimmer 1.4s linear infinite;
   }
 }

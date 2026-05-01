@@ -52,12 +52,6 @@ export default function Sidebar({ mobileOpen = false, onClose }: SidebarProps = 
     navigate('/login');
   };
 
-  const tierBadge = {
-    FOUNDING_FREE: { label: 'Founding Member', color: 'bg-amber-50 text-amber-700 border border-amber-200' },
-    STANDARD: { label: 'Standard', color: 'bg-gray-100 text-gray-700' },
-    FLEET: { label: 'Fleet', color: 'bg-blue-50 text-blue-700' },
-  }[user?.subscriptionTier || 'STANDARD'];
-
   return (
     <aside
       className={`
@@ -101,13 +95,6 @@ export default function Sidebar({ mobileOpen = false, onClose }: SidebarProps = 
               <p className="text-xs text-emerald-300/70 truncate">{user?.email}</p>
             </div>
           </div>
-          {!isAdmin && (
-            <div className="mt-2">
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${tierBadge?.color}`}>
-                {tierBadge?.label}
-              </span>
-            </div>
-          )}
         </div>
       </div>
 

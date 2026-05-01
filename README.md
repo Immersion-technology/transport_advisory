@@ -1,6 +1,6 @@
-# Transport Advisory — Frontend
+# AutoDoc — Frontend
 
-Web dashboard for the Transport Advisory vehicle compliance platform.
+Web dashboard for the AutoDoc vehicle compliance platform (privately owned — not government affiliated).
 
 ## Tech Stack
 

@@ -9,31 +9,31 @@ interface SEOProps {
   image?: string;
 }
 
-const SITE_NAME = 'Transport Advisory';
+const SITE_NAME = 'Transport Advisory Services';
 const SITE_URL = 'https://transportadvisory.ng';
 const DEFAULT_DESCRIPTION =
-  'Nigeria\'s vehicle compliance platform. Track Motor Insurance, Vehicle License, and Roadworthiness Certificate expiry dates in one place. Receive SMS and email reminders before documents expire and renew online without office visits.';
+  'Transport Advisory Services — your vehicle documents, road traffic and vehicular concerns, always in order. Track Vehicle Insurance, Vehicle Licence and Roadworthiness expiry, all in one place. Free SMS and e-mail reminders, online renewal, and doorstep delivery. Not government owned.';
 const DEFAULT_IMAGE = `${SITE_URL}/apple-touch-icon.svg`;
 
 const routeMetadata: Record<string, { title: string; description?: string; noindex?: boolean }> = {
   '/': {
-    title: 'Transport Advisory — Vehicle Compliance Platform for Nigeria',
-    description: 'Never miss a vehicle document expiry again. Transport Advisory tracks your Motor Insurance, Vehicle License, and Roadworthiness Certificate, sends SMS and email reminders, and lets you renew online without licensing office visits. First 50 subscribers free.',
+    title: 'Transport Advisory Services — Vehicle Compliance Platform for Nigeria',
+    description: 'Transport Advisory Services tracks Vehicle Insurance, Vehicle Licence, and Roadworthiness expiry — sends free SMS and e-mail reminders, renews documents online, and delivers them to your doorstep. Avoid ₦60,000+ ANPR fines in Lagos. Not government owned.',
   },
-  '/login': { title: 'Sign In · Transport Advisory', description: 'Sign in to manage your vehicle documents, track expiry dates, and renew online.' },
-  '/register': { title: 'Create Account · Transport Advisory', description: 'Join Transport Advisory — Nigeria\'s smarter way to manage vehicle compliance documents.' },
-  '/dashboard': { title: 'Dashboard · Transport Advisory', noindex: true },
-  '/vehicles': { title: 'My Vehicles · Transport Advisory', noindex: true },
-  '/applications': { title: 'Applications · Transport Advisory', noindex: true },
-  '/verifications': { title: 'Vehicle Verification · Transport Advisory', noindex: true },
-  '/settings': { title: 'Settings · Transport Advisory', noindex: true },
-  '/admin': { title: 'Admin · Transport Advisory', noindex: true },
+  '/login': { title: 'Sign In · Transport Advisory Services', description: 'Sign in to manage your vehicle documents, track expiry dates, and renew online.' },
+  '/start': { title: 'Start a Service · Transport Advisory Services', description: 'Submit your vehicle and document details — we create your account and send a one-time login link to your email.' },
+  '/auth/magic': { title: 'Signing in · Transport Advisory Services', noindex: true },
+  '/dashboard': { title: 'Dashboard · Transport Advisory Services', noindex: true },
+  '/vehicles': { title: 'My Vehicles · Transport Advisory Services', noindex: true },
+  '/applications': { title: 'Applications · Transport Advisory Services', noindex: true },
+  '/verifications': { title: 'Vehicle Verification · Transport Advisory Services', noindex: true },
+  '/settings': { title: 'Settings · Transport Advisory Services', noindex: true },
+  '/admin': { title: 'Admin · Transport Advisory Services', noindex: true },
 };
 
 export default function SEO(props: SEOProps = {}) {
   const { pathname } = useLocation();
 
-  // Pick closest-matching route metadata
   const routeMeta = routeMetadata[pathname]
     || Object.entries(routeMetadata).find(([k]) => k !== '/' && pathname.startsWith(k))?.[1]
     || routeMetadata['/'];
@@ -44,9 +44,8 @@ export default function SEO(props: SEOProps = {}) {
   const image = props.image || DEFAULT_IMAGE;
   const url = `${SITE_URL}${pathname}`;
   const keywords = props.keywords
-    || 'vehicle compliance nigeria, motor insurance reminder, vehicle license renewal, roadworthiness certificate, niid verification, hackney permit, lagos car papers, askniid, verify autoreg, vehicle documents nigeria';
+    || 'transport advisory services, vehicle compliance nigeria, motor insurance reminder, vehicle licence renewal, roadworthiness certificate, hackney permit, commercial vehicle permit, ride-hailing permit, fleet management nigeria, lagos anpr fines, change of ownership, articulated vehicle registration';
 
-  // Structured data (schema.org Organization + WebApplication)
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -59,7 +58,7 @@ export default function SEO(props: SEOProps = {}) {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'NGN',
-      description: 'Free for the first 50 subscribers',
+      description: 'Free reminders forever — service charge applied only at point of renewal',
     },
     provider: {
       '@type': 'Organization',

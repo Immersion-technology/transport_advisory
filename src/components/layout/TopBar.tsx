@@ -25,7 +25,7 @@ interface TopBarProps {
 export default function TopBar({ onMenuClick }: TopBarProps) {
   const { pathname } = useLocation();
   const { user } = useAuth();
-  const title = routeTitles[pathname.replace(/\/[a-f0-9-]{10,}.*/, '')] || routeTitles[pathname] || 'Transport Advisory';
+  const title = routeTitles[pathname.replace(/\/[a-f0-9-]{10,}.*/, '')] || routeTitles[pathname] || 'Transport Advisory Services';
   const isAdmin = user?.role === 'ADMIN';
 
   return (

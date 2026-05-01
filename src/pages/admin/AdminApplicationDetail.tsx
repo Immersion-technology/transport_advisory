@@ -127,10 +127,6 @@ export default function AdminApplicationDetail() {
                   <p className="text-sm font-semibold text-gray-900">{user?.firstName} {user?.lastName}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">Subscriber #</p>
-                  <p className="text-sm font-semibold text-gray-900">#{user?.subscriberNumber}</p>
-                </div>
-                <div>
                   <p className="text-xs text-gray-500 flex items-center gap-1"><Mail size={10} />Email</p>
                   <p className="text-sm font-medium text-gray-900 truncate">{user?.email}</p>
                 </div>

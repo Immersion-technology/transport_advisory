@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /start
 Allow: /login
-Allow: /register
 
 # Authenticated routes — no value to search engines
 Disallow: /dashboard
@@ -11,7 +11,21 @@ Disallow: /verifications
 Disallow: /settings
 Disallow: /admin
 
-# Callback / transactional pages
+# Auth + transactional flows that contain one-time tokens
+Disallow: /auth/magic/
 Disallow: /applications/*/payment-callback
+Disallow: /confirm-reminder/
+
+# Block AI training crawlers that don't drive traffic to us
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
 
 Sitemap: https://transportadvisory.ng/sitemap.xml

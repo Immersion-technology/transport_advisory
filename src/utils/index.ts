@@ -40,6 +40,7 @@ export const docTypeLabel = (type: DocumentType): string => {
     VEHICLE_LICENSE: 'Vehicle License',
     ROADWORTHINESS: 'Roadworthiness Certificate',
     HACKNEY_PERMIT: 'Hackney Permit',
+    CHANGE_OF_OWNERSHIP: 'Change of Ownership',
   };
   return map[type];
 };

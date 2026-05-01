@@ -22,10 +22,10 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       const url: string = error.config?.url || '';
-      // A 401 from the login/register endpoints means "wrong credentials", not
-      // "session expired" — let the page handle it with a toast. Only force a
+      // A 401 from a public auth endpoint means "wrong credentials" or
+      // "expired link" — let the page handle it with a toast. Only force a
       // redirect when an authenticated request (has a token) gets rejected.
-      const isAuthEndpoint = /\/auth\/(login|register)/.test(url);
+      const isAuthEndpoint = /\/auth\/(login|register|checkout|magic-link)/.test(url);
       const hasToken = !!localStorage.getItem('ta_token');
 
       if (!isAuthEndpoint && hasToken) {

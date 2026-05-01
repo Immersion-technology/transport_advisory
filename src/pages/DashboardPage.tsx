@@ -6,10 +6,9 @@ import { useAuth } from '../context/AuthContext';
 import { getVehicles } from '../api/vehicles';
 import { getApplications } from '../api/applications';
 import Card from '../components/ui/Card';
-import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import { PageLoader } from '../components/ui/Spinner';
-import { formatDate, daysUntilExpiry, getDocumentStatus, getStatusColor, docTypeLabel, formatNaira } from '../utils';
+import { formatDate, daysUntilExpiry, getDocumentStatus, getStatusColor, docTypeLabel } from '../utils';
 import type { Document, Vehicle } from '../types';
 
 const fadeUp = {
@@ -107,7 +106,7 @@ export default function DashboardPage() {
         className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           icon={Car} label="Vehicles" value={vehicles.length}
-          sub={`of ${user?.subscriptionTier === 'FLEET' ? 20 : 3} allowed`}
+          sub="tracked"
           color="bg-[#0A3828]/10 text-[#0A3828]"
         />
         <StatCard
@@ -155,23 +154,12 @@ export default function DashboardPage() {
 
         {/* Right sidebar */}
         <motion.div {...fadeUp} transition={{ duration: 0.4, delay: 0.15 }} className="space-y-4">
-          {/* Subscription */}
+          {/* Tracking & reminders are free */}
           <Card className="p-5 bg-gradient-to-br from-[#0A3828] to-[#15803d] text-white border-0">
-            <div className="flex items-center justify-between mb-3">
-              <Badge variant="gold">
-                {user?.subscriptionTier === 'FOUNDING_FREE' ? '⭐ Founding Member' :
-                  user?.subscriptionTier === 'FLEET' ? 'Fleet' : 'Standard'}
-              </Badge>
-              {user?.subscriberNumber && (
-                <span className="text-white/60 text-xs">#{user.subscriberNumber}</span>
-              )}
-            </div>
-            <p className="text-lg font-bold text-white">
-              {user?.subscriptionTier === 'FOUNDING_FREE' ? 'Free Access' :
-                user?.subscriptionTier === 'FLEET' ? formatNaira(15000) + '/yr' : formatNaira(5000) + '/yr'}
-            </p>
-            <p className="text-white/60 text-xs mt-1">
-              Up to {user?.subscriptionTier === 'FLEET' ? 20 : 3} vehicles
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-200/80">Your account</p>
+            <p className="text-lg font-bold text-white mt-1.5">Tracking & reminders are free</p>
+            <p className="text-white/70 text-xs mt-1 leading-relaxed">
+              No subscription. You only pay the government fee plus a small service charge when you renew or submit a new application.
             </p>
           </Card>
 

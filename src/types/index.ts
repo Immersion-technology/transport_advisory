@@ -1,33 +1,81 @@
+export type Gender = 'MALE' | 'FEMALE' | 'OTHER' | 'PREFER_NOT_TO_SAY';
+
 export interface User {
   id: string;
   email: string;
   phone: string;
   firstName: string;
   lastName: string;
+  othernames?: string;
+  gender?: Gender;
+  address?: string;
   role: 'USER' | 'ADMIN';
   permissions?: string[];
   isSuperAdmin?: boolean;
-  subscriptionTier: 'FOUNDING_FREE' | 'STANDARD' | 'FLEET';
-  subscriberNumber: number;
   isActive: boolean;
   emailVerified: boolean;
   createdAt: string;
+}
+
+export interface VehicleCategory {
+  id: string;
+  key: string;
+  label: string;
+  description?: string;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+export interface DocumentPricing {
+  id: string;
+  categoryId: string;
+  documentType: DocumentType;
+  basePrice: number;
+  notes?: string;
+  isActive: boolean;
+  category?: VehicleCategory;
+}
+
+export interface PricingQuote {
+  basePrice: number;
+  serviceFee: number;
+  serviceFeeRate: number;
+  total: number;
+  notes?: string;
+  categoryId: string;
+  documentType: DocumentType;
 }
 
 export interface Vehicle {
   id: string;
   userId: string;
   plateNumber: string;
-  make: string;
-  model: string;
-  year: number;
-  stateOfRegistration: string;
+  make?: string;
+  model?: string;
+  year?: number;
+  stateOfRegistration?: string;
+  colour?: string;
+  chassisNumber?: string;
+  engineNumber?: string;
+  registrationNumber?: string;
+  rwcNumber?: string;
+  chassisPhotoUrl?: string;
+  licensePhotoUrl?: string;
+  categoryId?: string;
+  category?: VehicleCategory;
+  isVerified: boolean;
+  verifiedAt?: string;
   isActive: boolean;
   createdAt: string;
   documents: Document[];
 }
 
-export type DocumentType = 'MOTOR_INSURANCE' | 'VEHICLE_LICENSE' | 'ROADWORTHINESS' | 'HACKNEY_PERMIT';
+export type DocumentType =
+  | 'MOTOR_INSURANCE'
+  | 'VEHICLE_LICENSE'
+  | 'ROADWORTHINESS'
+  | 'HACKNEY_PERMIT'
+  | 'CHANGE_OF_OWNERSHIP';
 
 export interface Document {
   id: string;
@@ -60,7 +108,7 @@ export interface Application {
   completedFileUrl?: string;
   completedAt?: string;
   createdAt: string;
-  vehicle?: { plateNumber: string; make: string; model: string };
+  vehicle?: { plateNumber: string; make?: string; model?: string; isVerified?: boolean };
   delivery?: Delivery;
   documents?: ApplicationDocument[];
   statusHistory?: StatusHistory[];

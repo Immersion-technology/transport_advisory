@@ -6,7 +6,7 @@ interface LogoProps {
 }
 
 /**
- * LogoMark — the icon-only version of the Transport Advisory logo.
+ * LogoMark — the icon-only version of the Transport Advisory Services logo.
  * A shield (compliance) with a road-forward chevron and checkmark (verified transport).
  */
 export function LogoMark({ size = 40, className = '', variant = 'default' }: LogoProps) {
@@ -98,7 +98,7 @@ export function LogoFull({
           className="font-medium mt-0.5"
           style={{ color: subColor, fontSize: size * 0.26, letterSpacing: '0.02em' }}
         >
-          Vehicle Compliance
+          Vehicle Compliance · Not Government Owned
         </span>
       </div>
     </div>

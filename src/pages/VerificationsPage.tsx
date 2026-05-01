@@ -176,7 +176,7 @@ export default function VerificationsPage() {
           </div>
           <div>
             <h3 className="font-semibold text-gray-900">Pre-Purchase Vehicle Check</h3>
-            <p className="text-xs text-gray-500">Verify insurance status via NIID database</p>
+            <p className="text-xs text-gray-500">Verify any vehicle against the insurance / autoreg / VIO vehicle database before buying</p>
           </div>
         </div>
 
@@ -196,7 +196,7 @@ export default function VerificationsPage() {
 
         <div className="mt-5 grid grid-cols-3 gap-4 text-center">
           {[
-            { icon: CheckCircle, label: 'Insurance Status', desc: 'via NIID database', color: 'text-emerald-600 bg-emerald-50' },
+            { icon: CheckCircle, label: 'Insurance Status', desc: 'via vehicle database', color: 'text-emerald-600 bg-emerald-50' },
             { icon: Search, label: 'Policy Details', desc: 'Insurer, policy no.', color: 'text-blue-600 bg-blue-50' },
             { icon: AlertTriangle, label: 'Fraud Alert', desc: 'Flag missing records', color: 'text-amber-600 bg-amber-50' },
           ].map(({ icon: Icon, label, desc, color }) => (

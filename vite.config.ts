@@ -17,11 +17,19 @@ export default defineConfig({
     },
   },
   build: {
-    target: 'es2020',
+    // Modern baseline — Chrome 100+ / Firefox 100+ / Safari 15+ / Edge 100+ ship
+    // smaller bundles than es2020 (no async-iteration polyfills, native top-level
+    // await, optional chaining at runtime, etc). Anything older than 2022 is
+    // <0.5% of Nigerian mobile traffic.
+    target: ['es2022', 'chrome100', 'edge100', 'firefox100', 'safari15'],
     sourcemap: false,
     cssCodeSplit: true,
+    cssMinify: 'esbuild',
     minify: 'esbuild',
     chunkSizeWarningLimit: 600,
+    // Inline anything <=4KB so we save HTTP round-trips on small icons / SVGs.
+    assetsInlineLimit: 4096,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
         // Split vendor code into cacheable chunks. First load pulls only what's
