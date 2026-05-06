@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, CheckCircle, Mail, ShieldCheck,
-  Car, RefreshCw, FilePlus, AlertTriangle, Upload, X,
+  RefreshCw, FilePlus, AlertTriangle, Upload, X,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { LogoMark } from '../components/ui/Logo';
@@ -16,7 +16,7 @@ import * as authApi from '../api/auth';
 import * as publicApi from '../api/public';
 import type { CheckoutPayload } from '../api/auth';
 import type { PricingMatrix, UploadResult } from '../api/public';
-import type { DocumentType } from '../types';
+import type { DocumentType } from '../types'; // used in FormShape
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -66,7 +66,7 @@ const DOCUMENT_OPTIONS_FRESH = [
 
 const DELIVERY_OPTIONS = [
   { value: '', label: 'No delivery (soft copy only)' },
-  { value: 'STANDARD', label: 'Standard delivery (3–5 days) — ₦2,000' },
+  { value: 'STANDARD', label: 'Standard delivery (3–5 days) — ₦3,000' },
   { value: 'EXPRESS', label: 'Express delivery (1–2 days) — ₦4,500' },
   { value: 'SAME_DAY', label: 'Same-day Lagos delivery — ₦8,000' },
 ];
@@ -160,12 +160,6 @@ function PhotoInput({ label, required, kind, value, onChange }: PhotoInputProps)
   );
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function formatNaira(n: number) {
-  return '₦' + n.toLocaleString('en-NG');
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function StartServicePage() {
@@ -206,7 +200,6 @@ export default function StartServicePage() {
   const kind = watch('kind');
   const documentType = watch('documentType');
   const deliveryTier = watch('deliveryTier');
-  const categoryId = watch('categoryId');
 
   // Change of Ownership only available under FRESH
   const documentOptions = kind === 'FRESH' ? DOCUMENT_OPTIONS_FRESH : DOCUMENT_OPTIONS_RENEWAL;
@@ -221,11 +214,6 @@ export default function StartServicePage() {
         .sort((a, b) => a.sortOrder - b.sortOrder)
         .map((c) => ({ value: c.id, label: c.label }))
     : [];
-
-  // Compute price quote
-  const quote = pricing && categoryId && documentType
-    ? publicApi.computeQuote(pricing, categoryId, documentType as DocumentType)
-    : null;
 
   const isFresh = kind === 'FRESH';
   const needsLicensePhoto = documentType === 'CHANGE_OF_OWNERSHIP';
@@ -673,46 +661,6 @@ export default function StartServicePage() {
                   </p>
                 </div>
               </div>
-
-              {/* Price preview (FRESH + categoryId set) */}
-              {isFresh && quote && (
-                <div className="bg-[#F5F7F2] border border-gray-200 rounded-xl p-4">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Estimated charges</p>
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-sm text-gray-700">
-                      <span>Government / base fee</span>
-                      <span>{formatNaira(quote.basePrice)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-700">
-                      <span>Service fee (15% VAT-inclusive)</span>
-                      <span>{formatNaira(quote.serviceFee)}</span>
-                    </div>
-                    {quote.notes && (
-                      <p className="text-xs text-gray-400 italic mt-1">{quote.notes}</p>
-                    )}
-                    <div className="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-gray-200 mt-2">
-                      <span>Total</span>
-                      <span>{formatNaira(quote.total)}</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-2">Payment is due at checkout inside your dashboard.</p>
-                </div>
-              )}
-
-              {isFresh && !quote && categoryId && (
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                  <p className="text-xs text-amber-800">Pricing for this category is not yet set — an admin will confirm the total before payment.</p>
-                </div>
-              )}
-
-              {!isFresh && (
-                <div className="bg-[#F5F7F2] border border-gray-200 rounded-xl p-4">
-                  <p className="text-xs text-gray-500">
-                    Pricing for renewal applications is confirmed after vehicle details are verified.
-                    You won't be charged until then.
-                  </p>
-                </div>
-              )}
 
               <div className="flex justify-between pt-2">
                 <Button type="button" variant="outline" onClick={() => setStep(2)} icon={<ArrowLeft size={16} />}>
