@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   Shield, Bell, FileText, Car, Search, CheckCircle, Clock,
   ArrowRight, MapPin, Zap, Award, AlertTriangle, Building2,
-  Truck, RefreshCw, FilePlus, ArrowLeftRight, Users, Package,
+  Truck, RefreshCw, FilePlus, ArrowLeftRight, Users,
 } from 'lucide-react';
 import { LogoMark } from '../components/ui/Logo';
 import Button from '../components/ui/Button';
@@ -60,20 +60,6 @@ const STEPS = [
   { step: '3', title: 'Renew or apply online', desc: 'Start a renewal or a new application from your dashboard. Pay the government fee plus our service charge. Soft copy + delivery to your doorstep.' },
 ];
 
-// Service charge schedule — only applied at the point of renewal or new application.
-// No subscription, no annual fee, no per-vehicle fee. Tracking and reminders are free.
-const SERVICE_FEES = [
-  { doc: 'Motor Insurance',      renewal: '₦1,500', fresh: '₦3,500' },
-  { doc: 'Vehicle Licence',      renewal: '₦2,500', fresh: '₦3,500' },
-  { doc: 'Roadworthiness',       renewal: '₦2,000', fresh: '₦3,500' },
-  { doc: 'Commercial Permit',    renewal: '₦2,500', fresh: '₦3,500' },
-];
-
-const DELIVERY_FEES = [
-  { tier: 'Standard delivery',   timing: '3–5 days',   price: '₦2,000' },
-  { tier: 'Express delivery',    timing: '1–2 days',   price: '₦4,500' },
-  { tier: 'Same-day (Lagos)',    timing: 'Within hours', price: '₦8,000' },
-];
 
 const STATS = [
   { value: '3–4', label: 'Compulsory documents tracked', icon: FileText },
@@ -199,7 +185,6 @@ export default function OverviewPage() {
             <a href="#problem" className="text-sm text-gray-600 hover:text-gray-900 hidden md:block">The Problem</a>
             <a href="#services" className="text-sm text-gray-600 hover:text-gray-900 hidden md:block">Services</a>
             <a href="#fleet" className="text-sm text-gray-600 hover:text-gray-900 hidden md:block">Fleet</a>
-            <a href="#pricing" className="text-sm text-gray-600 hover:text-gray-900 hidden md:block">Pricing</a>
             {user ? (
               <Link to={user.role === 'ADMIN' ? '/admin' : '/dashboard'}>
                 <Button size="sm" icon={<ArrowRight size={15} />}>Open Dashboard</Button>
@@ -561,71 +546,6 @@ export default function OverviewPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="bg-white border-y border-gray-100 py-12 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 leading-tight">No subscription. Pay only when you renew.</h2>
-            <p className="text-gray-600 mt-3 sm:mt-4">
-              Tracking, reminders and your dashboard are <span className="font-semibold text-gray-900">always free</span>.
-              You're only charged the government fee plus a small service fee when you actually <span className="font-semibold text-gray-900">renew</span> a document or submit a <span className="font-semibold text-gray-900">new application</span>.
-            </p>
-          </div>
-
-          {/* Service-charge schedule */}
-          <div className="max-w-4xl mx-auto bg-[#F5F7F2] rounded-3xl border border-gray-100 p-5 sm:p-7">
-            <div className="flex items-center gap-2 mb-4">
-              <FileText size={16} className="text-[#0A3828]" />
-              <h3 className="font-semibold text-gray-900 text-sm">Service charge schedule</h3>
-              <span className="ml-auto text-[11px] text-gray-500">government fees billed separately at cost</span>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-left text-gray-500 text-xs uppercase tracking-wide">
-                    <th className="font-semibold pb-3 pr-4">Document</th>
-                    <th className="font-semibold pb-3 pr-4">Renewal service fee</th>
-                    <th className="font-semibold pb-3">New application fee</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {SERVICE_FEES.map((row) => (
-                    <tr key={row.doc} className="border-t border-gray-200/70">
-                      <td className="py-3 pr-4 font-medium text-gray-900">{row.doc}</td>
-                      <td className="py-3 pr-4 text-gray-700">{row.renewal}</td>
-                      <td className="py-3 text-gray-700">{row.fresh}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Delivery options */}
-          <div className="max-w-4xl mx-auto mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-            {DELIVERY_FEES.map((d) => (
-              <div key={d.tier} className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-5">
-                <div className="flex items-center gap-2">
-                  <Package size={15} className="text-[#0A3828]" />
-                  <p className="text-sm font-semibold text-gray-900">{d.tier}</p>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">{d.timing}</p>
-                <p className="text-base font-bold text-[#0A3828] mt-2">{d.price}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs text-gray-500 text-center mt-6 max-w-2xl mx-auto">
-            No subscription, no annual fee, no per-vehicle fee. Add as many vehicles as you need. Service fees may be revised — current rates always shown at checkout.
-          </p>
-
-          <div className="text-center mt-8">
-            <Link to="/start">
-              <Button size="lg" icon={<ArrowRight size={16} />}>Start a service</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
