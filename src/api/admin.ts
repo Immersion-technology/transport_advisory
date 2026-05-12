@@ -24,6 +24,9 @@ export const getUnconfirmedReminders = () =>
 export const getAdminUsers = (params?: { page?: number; limit?: number }) =>
   api.get<ApiResponse<User[]>>('/admin/users', { params });
 
+export const updateUserStatus = (id: string, data: { action: 'SUSPEND' | 'BLOCK' | 'ACTIVATE'; reason?: string }) =>
+  api.put<ApiResponse>(`/admin/users/${id}/status`, data);
+
 export const getAdminApplication = (id: string) =>
   api.get<ApiResponse<Application>>(`/admin/applications/${id}`);
 

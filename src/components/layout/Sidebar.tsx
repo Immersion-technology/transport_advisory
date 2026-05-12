@@ -4,6 +4,7 @@ import {
   Settings, LogOut, Users, ChevronRight, X,
   Bell, Package, ShieldCheck, Database,
 } from 'lucide-react';
+
 import { useAuth } from '../../context/AuthContext';
 import { LogoMark } from '../ui/Logo';
 
@@ -25,6 +26,7 @@ const adminNavItems: AdminNavItem[] = [
   { to: '/admin/reminders', icon: Bell, label: 'Reminders', permission: 'MANAGE_REMINDERS' },
   { to: '/admin/registry', icon: Database, label: 'Plate Registry', permission: 'MANAGE_APPLICATIONS' },
   { to: '/admin/staff', icon: ShieldCheck, label: 'Admin Staff', superAdminOnly: true },
+  { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 interface SidebarProps {
